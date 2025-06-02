@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiori di Preghiera - Downloading Page | Pagina di Download</title>
+  <style>
+    :root {
+      --bg-main: #191927;
+      --bg-card: #25253a;
+      --accent: #d99cff;
+      --accent-light: #f6e6ff;
+      --text-main: #f6e6ff;
+      --text-muted: #b9a5d1;
+      --shadow: 0 6px 32px rgba(140, 100, 255, 0.10);
+      --shadow-hover: 0 10px 40px rgba(140, 100, 255, 0.18);
+      --border-radius: 20px;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-main);
+      margin: 0;
+      padding: 0;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin-top: 40px;
+      padding: 36px 28px 28px 28px;
+      text-align: center;
+      max-width: 400px;
+      width: 94vw;
+      padding: 10px;
+    }
+    .container h1 {
+      font-size: 2.1em;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 10px;
+      margin-top: 0;
+      font-weight: 700;
+      text-shadow: 0 2px 12px rgba(217,156,255,0.15);
+    }
+    .container p {
+      color: var(--text-muted);
+      font-size: 1.13em;
+      margin: 16px 0;
+    }
+    .download-link {
+      display: inline-block;
+      background: linear-gradient(90deg, #d99cff 0%, #8e7fff 100%);
+      color: #191927;
+      font-weight: bold;
+      border: none;
+      border-radius: 14px;
+      padding: 15px 38px;
+      margin: 20px 0 16px 0;
+      text-decoration: none;
+      font-size: 1.13em;
+      box-shadow: 0 4px 20px rgba(140,100,255,0.16);
+      letter-spacing: 0.3px;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.13s;
+    }
+    .download-link:hover, .download-link:focus {
+      background: linear-gradient(90deg, #d99cff 10%, #ffb4e6 100%);
+      color: #22203a;
+      box-shadow: var(--shadow-hover);
+      transform: scale(1.045);
+    }
+    .thank-you {
+      color: var(--accent);
+      font-size: 1.12em;
+      margin-top: 18px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .downloading-message {
+      margin-top: 20px;
+      margin-bottom: 0;
+      font-size: 1.05em;
+      color: #a978dc;
+      font-style: italic;
+      letter-spacing: 0.1px;
+      animation: fadeInUp 1.1s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .flower-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 36px;
+      gap: 32px;
+      padding: 10px;
+    }
+    .flower-card {
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      width: 250px;
+      padding: 22px 16px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: 1.5px solid #2e254d;
+    }
+    .flower-card:hover {
+      transform: translateY(-7px) scale(1.03);
+      box-shadow: var(--shadow-hover);
+      background: #2a1e3e;
+      border: 1.7px solid #d99cff;
+    }
+    .flower-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      margin-bottom: 16px;
+      background: #1e162f;
+      box-shadow: 0 2px 10px rgba(140, 100, 255, 0.09);
+    }
+    .flower-card .subtitle {
+      font-size: 1.06em;
+      color: #e8b6fb;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 7px;
+      letter-spacing: 0.2px;
+    }
+    .flower-card .quote {
+      font-size: 0.97em;
+      color: #b3a3c8;
+      margin: 0;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 3vw 20px 3vw;
+      }
+      .flower-container {
+        gap: 18px;
+      }
+      .flower-card {
+        width: 95vw;
+        max-width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fiori di Preghiera</h1>
+    <p class="downloading-message" id="downloading-message">
+      
+    </p>
+    <a 
+      href="https://example.com/fiori_di_preghiera.apk" 
+      class="download-link" 
+      download
+      id="download-link"
+    >Download APK</a>
+    <p class="thank-you" id="thank-you" style="display:none;">
+      Thank you for downloading Fiori di Preghiera!<br>
+      Grazie per aver scaricato Fiori di Preghiera!
+    </p>
+  </div>
+
+  <div class="flower-container flower"></div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Detect language, default to English if not Italian
+    const userLanguage = (navigator.language && navigator.language.startsWith("it")) ? "it" : "en";
+
+    // Flower cards with both English and Italian
+    const flowers = [
+      {
+        src: "flower1.png",
+        subtitle: {
+          en: "Every petal unfolds a story of radiant joy and endless possibility.",
+          it: "Ogni petalo svela una storia di gioia radiosa e infinite possibilità."
+        },
+        quote: {
+          en: "Like this blossom, may your heart always open to the sunshine of love.",
+          it: "Come questo fiore, che il tuo cuore sia sempre aperto al sole dell’amore."
+        }
+      },
+      {
+        src: "flower3.png",
+        subtitle: {
+          en: "Overflowing with the laughter of spring, this flower celebrates life's brightest moments.",
+          it: "Colmo delle risate della primavera, questo fiore celebra i momenti più luminosi della vita."
+        },
+        quote: {
+          en: "Let your days be as vibrant and hopeful as a garden in full bloom.",
+          it: "Che i tuoi giorni siano vivaci e pieni di speranza come un giardino in piena fioritura."
+        }
+      },
+      {
+        src: "flower2.png",
+        subtitle: {
+          en: "A symbol of exuberant love, each bloom whispers hope and wonder into the world.",
+          it: "Simbolo di amore esuberante, ogni fiore sussurra speranza e meraviglia al mondo."
+        },
+        quote: {
+          en: "May every glance at this flower remind you: joy multiplies when shared.",
+          it: "Che ogni sguardo a questo fiore ti ricordi: la gioia si moltiplica quando è condivisa."
+        }
+      }
+    ];
+
+    function CreateFlowerCards() {
+      const container = document.querySelector('.flower');
+      container.innerHTML = ""; // Clear previous if any
+      flowers.forEach(flower => {
+        const card = document.createElement('div');
+        card.className = 'flower-card';
+
+        const img = document.createElement('img');
+        img.src = flower.src;
+        img.alt = "Flower image";
+
+        const subtitle = document.createElement('div');
+        subtitle.className = 'subtitle';
+        subtitle.textContent = flower.subtitle[userLanguage];
+
+        const quote = document.createElement('div');
+        quote.className = 'quote';
+        quote.textContent = flower.quote[userLanguage];
+
+        card.appendChild(img);
+        card.appendChild(subtitle);
+        card.appendChild(quote);
+        container.appendChild(card);
+      });
+    }
+    CreateFlowerCards();
+
+    // Downloading message and thank you note logic
+    const downloadLink = document.getElementById('download-link');
+    const downloadingMsg = document.getElementById('downloading-message');
+    const thankYou = document.getElementById('thank-you');
+    downloadLink.addEventListener('click', function () {
+      // Dual-language message
+      downloadingMsg.innerHTML = userLanguage === "it"
+        ? "Il download è in corso… Attendere prego.<br>Your download is starting… Please wait."
+        : "Your download is starting… Please wait.<br>Il download è in corso… Attendere prego.";
+      setTimeout(() => {
+        downloadingMsg.style.display = "none";
+        thankYou.style.display = "block";
+      }, 3200);
+    });
+  });
+</script>
+</body>
+</html>
