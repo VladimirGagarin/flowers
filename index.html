@@ -57,6 +57,7 @@
       margin-top: 0;
       font-weight: 700;
       text-shadow: 0 2px 12px rgba(217,156,255,0.15);
+      text-transform: capitalize;
     }
     .container p {
       color: var(--text-muted);
@@ -111,6 +112,7 @@
       margin-top: 36px;
       gap: 32px;
       padding: 10px;
+      align-items: center;
     }
     .flower-card {
       background: var(--bg-card);
@@ -118,20 +120,24 @@
       box-shadow: var(--shadow);
       width: 250px;
       padding: 22px 16px;
-      text-align: center;
+      text-align: justify;
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
       border: 1.5px solid #2e254d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
-    .flower-card:hover {
-      transform: translateY(-7px) scale(1.03);
+    .flower-card:nth-child(2){
+      
       box-shadow: var(--shadow-hover);
       background: #2a1e3e;
       border: 1.7px solid #d99cff;
     }
     .flower-card img {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid var(--accent);
@@ -154,115 +160,244 @@
       margin-bottom: 6px;
       line-height: 1.5;
     }
-    @media (max-width: 600px) {
+    .button{
+        background: linear-gradient(90deg, #d99cff 0%, #8e7fff 100%);
+        color: #191927;
+        font-weight: bold;
+        border: none;
+        border-radius: 14px;
+        padding: 15px 38px;
+        margin: 20px 0 16px 0;
+        text-decoration: none;
+        font-size: 1.13em;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(140,100,255,0.16);
+        letter-spacing: 0.3px;
+        transition: background 0.15s, box-shadow 0.15s, transform 0.13s;
+    }.button:hover, .button:active{
+      opacity:  0.5;
+    }
+
+    .switch-container{
+      width: 95%;
+      font-size: medium;
+      margin-top: 10px;
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+       
+    }
+    .switch{
+      background: #2a1e3e;
+      border: 2.7px inset #d99cff;
+      display: flex;
+      font-size: 1rem;
+      width:100px;
+      padding: 10px 20px;
+      position: relative;
+      justify-content: space-between;
+      overflow: hidden;
+      border-radius: 25px;
+       box-shadow: var(--shadow-hover);
+
+    }
+    .switch .switch-button  {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      top:8%;
+      right: 5px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #d99cff 0%, #8e7fff 100%);
+      transition: all 500ms ease-in-out;
+    }
+    .switch .switch-button.translate{
+      transition: all 500ms ease-in-out;
+      left: 8px;
+      animation: glow 2s ease-in-out;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: var(--shadow-hover);
+        
+      }
+    }
+
+    .switch span{
+      font-size: 1rem;
+      color: #a978dc;
+    }
+    footer{ 
+      background: #221f33;
+      color: #e0d6f8;
+      padding: 32px 0 20px 0;
+      margin-top: 60px;
+      border: 2px solid #30295a;
+      text-align: justify;
+      font-size: 1.09em;
+      letter-spacing: 0.12px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      width: 65%;
+      border-radius: 10px;
+      text-align: center;
+
+    }
+    @media (max-width: 800px) {
       .container {
-        padding: 20px 3vw 20px 3vw;
+        padding: 18px 14px 14px 14px;
+        width: 99%;
       }
       .flower-container {
-        gap: 18px;
+        padding: 10px;
       }
       .flower-card {
-        width: 95vw;
-        max-width: 400px;
+        width: 99%;
+        border-radius: 5%;
+        box-shadow: var(--shadow-hover);
+        background: #2a1e3e;
+        border: 1.7px solid #d99cff;
+      }
+      .flower-card:hover{
+        transform: none;
+      }
+      .flower-card img {
+        width: 250px;
+        height: 250px;
+      }
+        .switch-container{
+          width: 95%;
+          padding: 10px 0;
+      }
+      footer{
+        width: 85%;
+        text-align: center;
+        border-radius: 10%;
       }
     }
   </style>
 </head>
 <body>
+  <div class="switch-container">
+    <div class="switch">
+      <span>EN</span>
+      <div class="switch-button" role="button"></div>
+      <span>IT</span>
+    </div>
+  </div>
   <div class="container">
     <h1>Fiori di Preghiera</h1>
     <p class="downloading-message" id="downloading-message">
-    
+      
     </p>
     <a 
-      href="https://github.com/VladimirGagarin/flowers/releases/download/v1.0.0/application-834f649e-e549-4547-9c1a-0d4619cda1bb.apk" 
+      href="https://example.com/fiori_di_preghiera.apk" 
       class="download-link" 
       download
       id="download-link"
-    >Download APP (140 MBs)</a>
-    <p class="thank-you" id="thank-you" style="display:none;">
-      Thank you for downloading Fiori di Preghiera!<br>
-      Grazie per aver scaricato Fiori di Preghiera!
+      data-italian="Scaricato l'App (150 MBs)"
+      data-english="Download APP (150 MBs)"
+    >Download APP (150 Mbs)</a>
+    <p class="thank-you" id="thank-you" style="display:none;" data-italian="Grazie per aver scaricato Fiori di Preghiera!" data-english=" Thank you for downloading Fiori di Preghiera!">
+      Thank you for downloading Fiori di Preghiera!
     </p>
   </div>
 
   <div class="flower-container flower"></div>
 
- <footer style="
-  background: #221f33;
-  color: #e0d6f8;
-  padding: 32px 0 20px 0;
-  margin-top: 60px;
-  border-top: 2px solid #30295a;
-  text-align: center;
-  font-size: 1.09em;
-  letter-spacing: 0.12px;
-  padding: 10px 20px;
-">
+ <footer>
   <div>
     <strong>Fiori di Preghiera</strong> – 
     <span>
-      Unisciti a una comunità che coltiva pace, speranza e amore attraverso la preghiera e la bellezza dei fiori.<br>
-      <em>Join a community that cultivates peace, hope, and love through prayer and the beauty of flowers.</em>
-      <br><br>
-      Per scoprire di più, risorse spirituali, novità ed eventi, visita la nostra pagina dedicata:<br>
-      <em>To discover more, spiritual resources, news, and events, visit our dedicated page:</em>
+      <em data-italian="Unisciti a una comunità che coltiva pace, speranza e amore attraverso la preghiera e la bellezza dei fiori." data-english="Per scoprire di più, risorse spirituali, novità ed eventi, visita la nostra pagina dedicata:">Join a community that cultivates peace, hope, and love through prayer and the beauty of flowers.</em>
       <br>
-      <a href="https://vladimirgagarin.github.io/fiori/" target="_blank" style="color:#d99cff;text-decoration:underline;">
-        Maggiori informazioni su Fiori di Preghiera &rarr;<br>
-        <span style="font-size:0.98em;">Learn more about Fiori di Preghiera &rarr;</span>
+      <a href="https://vladimirgagarin.github.io/fiori/" target="_blank" rel="noopener" role="button" tabindex="0" class="download-link">
+        <span style="font-size:0.98em;" data-italian=" Maggiori informazioni &rarr;" data-english="Learn more &rarr;">Learn more &rarr;</span>
       </a>
     </span>
     <br><br>
-    <span style="font-size:0.97em;color:#b9a5d1;">
-      &copy; 2025 Fiori di Preghiera • Tutti i diritti riservati.<br>
-      <em>&copy; 2025 Fiori di Preghiera • All rights reserved.</em>
+    <span style="font-size:0.97em;color:#b9a5d1; text-align: center;">
+      <em data-italian="&copy; 2025 Fiori di Preghiera • Tutti i diritti riservati" data-english="&copy; 2025 Fiori di Preghiera • All rights reserved.">&copy; 2025 Fiori di Preghiera • All rights reserved.</em>
     </span>
   </div>
 </footer>
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
-
+    
     // Detect language, default to English if not Italian
     const userLanguage = (navigator.language && navigator.language.startsWith("it")) ? "it" : "en";
+    let isEnglish = userLanguage === "en";
 
+    const switchBtn = document.querySelector('.switch-button');
+    switchBtn.classList.toggle("translate", !isEnglish)
+    translatePage();
+
+    switchBtn.onclick = () => {
+        switchBtn.classList.toggle("translate", isEnglish);
+        isEnglish = !isEnglish;
+        translatePage();
+    }
     // Flower cards with both English and Italian
     const flowers = [
-      {
-        src: "flower1.png",
-        subtitle: {
-          en: "Every petal unfolds a story of radiant joy and endless possibility.",
-          it: "Ogni petalo svela una storia di gioia radiosa e infinite possibilità."
+        {
+          src: "flower3.png",
+          subtitle: {
+            en: "Overflowing with the laughter of spring, this flower celebrates life's brightest moments.",
+            it: "Colmo delle risate della primavera, questo fiore celebra i momenti più luminosi della vita."
+          },
+          quote: {
+            en: "Let your days be as vibrant and hopeful as a garden in full bloom.",
+            it: "Che i tuoi giorni siano vivaci e pieni di speranza come un giardino in piena fioritura."
+          },
+          buttonText: {
+            en: "Send to Facebook",
+            it: "Invia a Facebook"
+          },
+          link: 'https://vladimirgagarin.github.io/flowers/'
         },
-        quote: {
-          en: "Like this blossom, may your heart always open to the sunshine of love.",
-          it: "Come questo fiore, che il tuo cuore sia sempre aperto al sole dell’amore."
-        }
-      },
-      {
-        src: "flower3.png",
-        subtitle: {
-          en: "Overflowing with the laughter of spring, this flower celebrates life's brightest moments.",
-          it: "Colmo delle risate della primavera, questo fiore celebra i momenti più luminosi della vita."
+        {
+          src: "flower1.png",
+          subtitle: {
+            en: "Every petal unfolds a story of radiant joy and endless possibility.",
+            it: "Ogni petalo svela una storia di gioia radiosa e infinite possibilità."
+          },
+          quote: {
+            en: "Like this blossom, may your heart always open to the sunshine of love.",
+            it: "Come questo fiore, che il tuo cuore sia sempre aperto al sole dell’amore."
+          },
+          buttonText: {
+            en: "Copy Link",
+            it: "Copia Link"
+          },
+          link: 'https://vladimirgagarin.github.io/flowers/'
         },
-        quote: {
-          en: "Let your days be as vibrant and hopeful as a garden in full bloom.",
-          it: "Che i tuoi giorni siano vivaci e pieni di speranza come un giardino in piena fioritura."
+        {
+          src: "flower2.png",
+          subtitle: {
+            en: "A symbol of exuberant love, each bloom whispers hope and wonder into the world.",
+            it: "Simbolo di amore esuberante, ogni fiore sussurra speranza e meraviglia al mondo."
+          },
+          quote: {
+            en: "May every glance at this flower remind you: joy multiplies when shared.",
+            it: "Che ogni sguardo a questo fiore ti ricordi: la gioia si moltiplica quando è condivisa."
+          },
+          buttonText: {
+            en: "Send to WhatsApp",
+            it: "Invia a WhatsApp"
+          },
+          link: "https://vladimirgagarin.github.io/flowers/"
         }
-      },
-      {
-        src: "flower2.png",
-        subtitle: {
-          en: "A symbol of exuberant love, each bloom whispers hope and wonder into the world.",
-          it: "Simbolo di amore esuberante, ogni fiore sussurra speranza e meraviglia al mondo."
-        },
-        quote: {
-          en: "May every glance at this flower remind you: joy multiplies when shared.",
-          it: "Che ogni sguardo a questo fiore ti ricordi: la gioia si moltiplica quando è condivisa."
-        }
-      }
-    ];
+      ];
+
+      const alertMessages = {
+          en: "Link copied to clipboard",
+          it: "Link copiato negli appunti"
+        };
+
 
     function CreateFlowerCards() {
       const container = document.querySelector('.flower');
@@ -278,18 +413,56 @@
         const subtitle = document.createElement('div');
         subtitle.className = 'subtitle';
         subtitle.textContent = flower.subtitle[userLanguage];
+        subtitle.setAttribute("data-english", flower.subtitle.en);
+        subtitle.setAttribute('data-italian', flower.subtitle.it);
+        subtitle.role = 'banner'
 
         const quote = document.createElement('div');
         quote.className = 'quote';
         quote.textContent = flower.quote[userLanguage];
+        quote.setAttribute("data-english", flower.quote.en);
+        quote.setAttribute("data-italian", flower.quote.it)
+
+        const linkBtn = document.createElement('button');
+        linkBtn.classList.add('button');
+        linkBtn.textContent = flower.buttonText[userLanguage];
+        linkBtn.setAttribute("data-english", flower.buttonText.en)
+        linkBtn.setAttribute("data-italian", flower.buttonText.it)
+
+        linkBtn.addEventListener('click', () => {
+          const buttonLabel = flower.buttonText[userLanguage];
+
+          if (buttonLabel === "Send to Facebook" || buttonLabel === "Invia a Facebook") {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(flower.link)}`, '_blank');
+          } else if (buttonLabel === "Send to WhatsApp" || buttonLabel === "Invia a WhatsApp") {
+            window.open(`https://wa.me/?text=${encodeURIComponent(flower.link)}`, '_blank');
+          } else if (buttonLabel === "Copy Link" || buttonLabel === "Copia Link") {
+            navigator.clipboard.writeText(flower.link)
+              .then(() => alert(alertMessages[userLanguage] || alertMessages.en))
+              .catch(err => console.error('Failed to copy link: ', err));
+          }
+      });
+
 
         card.appendChild(img);
         card.appendChild(subtitle);
         card.appendChild(quote);
+        card.appendChild(linkBtn)
         container.appendChild(card);
       });
     }
     CreateFlowerCards();
+
+    function translatePage(){
+      const allEl = document.querySelectorAll('[data-english]');
+
+      allEl.forEach(el => {
+        const eng = el.getAttribute('data-english');
+        const ita = el.getAttribute('data-italian');
+
+        el.textContent = isEnglish ? eng: ita;
+      })
+    }
 
     // Downloading message and thank you note logic
     const downloadLink = document.getElementById('download-link');
