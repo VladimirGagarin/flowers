@@ -359,7 +359,8 @@
 </footer>
 
 <div id="iframe-wrapper" class="iframe-overlay">
-  <button id="close-iframe">Close</button>
+<button id="close-iframe" data-english="Close" data-italian="Chiudi">Close</button>
+
   <iframe
     width="853"
     height="480"
@@ -388,8 +389,9 @@
     switchBtn.onclick = () => {
         switchBtn.classList.toggle("translate", isEnglish);
         isEnglish = !isEnglish;
-        userLanguage = isEnglish ? "en" : "it";
+        
         translatePage();
+        userLanguage = isEnglish ? "en" : "it";
         
     }
     // Flower cards with both English and Italian
@@ -531,16 +533,17 @@
     });
 
 
-    function translatePage(){
-      const allEl = document.querySelectorAll('[data-english]');
+    function translatePage() {
+      const allEl = document.querySelectorAll('[data-english][data-italian]');
 
       allEl.forEach(el => {
         const eng = el.getAttribute('data-english');
         const ita = el.getAttribute('data-italian');
 
-        el.textContent = isEnglish ? eng: ita;
-      })
+        el.textContent = isEnglish ? eng : ita;
+      });
     }
+
 
     // Downloading message and thank you note logic
     const downloadLink = document.getElementById('download-link');
