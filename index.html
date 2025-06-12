@@ -246,6 +246,39 @@
       text-align: center;
 
     }
+    .iframe-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.iframe-overlay iframe {
+  max-width: 90%;
+  max-height: 80%;
+  border: none;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+}
+
+#close-iframe {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000;
+}
+
     @media (max-width: 800px) {
       .container {
         padding: 18px 14px 14px 14px;
@@ -300,7 +333,7 @@
       id="download-link"
       data-italian="Scaricato l'App (125 MBs)"
       data-english="Download APP (125 MBs)"
-    >Download APP (125 Mbs)</a>
+    >Download APP (150 Mbs)</a>
     <p class="thank-you" id="thank-you" style="display:none;" data-italian="Grazie per aver scaricato Fiori di Preghiera!" data-english=" Thank you for downloading Fiori di Preghiera!">
       Thank you for downloading Fiori di Preghiera!
     </p>
@@ -312,7 +345,7 @@
   <div>
     <strong>Fiori di Preghiera</strong> – 
     <span>
-      <em data-italian="Unisciti a una comunità che coltiva pace, speranza e amore attraverso la preghiera e la bellezza dei fiori." data-english="Join a community that cultivates peace, hope, and love through prayer and the beauty of flowers.">Join a community that cultivates peace, hope, and love through prayer and the beauty of flowers.</em>
+      <em data-italian="Unisciti a una comunità che coltiva pace, speranza e amore attraverso la preghiera e la bellezza dei fiori." data-english="Per scoprire di più, risorse spirituali, novità ed eventi, visita la nostra pagina dedicata:">Join a community that cultivates peace, hope, and love through prayer and the beauty of flowers.</em>
       <br>
       <a href="https://vladimirgagarin.github.io/fiori/" target="_blank" rel="noopener" role="button" tabindex="0" class="download-link">
         <span style="font-size:0.98em;" data-italian=" Maggiori informazioni &rarr;" data-english="Learn more &rarr;">Learn more &rarr;</span>
@@ -324,6 +357,22 @@
     </span>
   </div>
 </footer>
+
+<div id="iframe-wrapper" class="iframe-overlay">
+  <button id="close-iframe">Close</button>
+  <iframe
+    width="853"
+    height="480"
+    src="https://www.youtube.com/embed/-RV-fzEE2Wk"
+    title="La Famiglia Crameri | The Child. The Family. The Calling. (Trailer Teaser)"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
+
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -339,7 +388,9 @@
     switchBtn.onclick = () => {
         switchBtn.classList.toggle("translate", isEnglish);
         isEnglish = !isEnglish;
+        userLanguage = isEnglish ? "en" : "it";
         translatePage();
+        
     }
     // Flower cards with both English and Italian
     const flowers = [
@@ -390,7 +441,25 @@
             it: "Invia a WhatsApp"
           },
           link: "https://vladimirgagarin.github.io/flowers/"
+        },
+        {
+          src: "camellia.png",
+          subtitle: {
+            en: "From petals of prophecy, a new vision begins to bloom.",
+            it: "Dai petali della profezia, inizia a sbocciare una nuova visione."
+          },
+          quote: {
+            en: "This flower unveils a story not yet told — the birth of a new film.",
+            it: "Questo fiore svela una storia ancora da raccontare — la nascita di un nuovo film."
+          },
+          buttonText: {
+            en: "New Movie",
+            it: "Nuovo Film"
+          },
+          link: "https://your-new-movie-iframe-link.com", // iframe link here
+          isIframe: true // <-- Add this flag to indicate it's an iframe link
         }
+
       ];
 
       const alertMessages = {
@@ -440,8 +509,12 @@
             navigator.clipboard.writeText(flower.link)
               .then(() => alert(alertMessages[userLanguage] || alertMessages.en))
               .catch(err => console.error('Failed to copy link: ', err));
+          } else if (buttonLabel === "New Movie" || buttonLabel === "Nuovo Film") {
+            // Show the iframe overlay
+            document.getElementById('iframe-wrapper').style.display = 'flex';
           }
-      });
+        });
+
 
 
         card.appendChild(img);
@@ -452,6 +525,11 @@
       });
     }
     CreateFlowerCards();
+
+    document.getElementById('close-iframe').addEventListener('click', () => {
+      document.getElementById('iframe-wrapper').style.display = 'none';
+    });
+
 
     function translatePage(){
       const allEl = document.querySelectorAll('[data-english]');
